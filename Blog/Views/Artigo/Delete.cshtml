@@ -1,0 +1,32 @@
+﻿@model Blog.Models.DownloadFileInfo
+
+<div class="section_two_three entry">
+
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.FileName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FileName)
+        </div>
+        <br />
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.descricao)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.descricao)
+        </div>
+
+    <br/>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("Voltar a lista", "Projetos")
+        </p>
+    }
+</div>

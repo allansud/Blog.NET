@@ -1,0 +1,42 @@
+﻿@model Blog.Models.MudarPasswordModel
+<div class="section_two_three entry">
+    <h2>Mudar a Senha</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.OldPassword)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.OldPassword)
+                @Html.ValidationMessageFor(model => model.OldPassword)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.NewPassword)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.NewPassword)
+                @Html.ValidationMessageFor(model => model.NewPassword)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ConfirmPassword)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+            <br/>
+            <p>
+                <input type="submit" value="Mudar Senha" />
+            </p>
+    }
+    <br/>
+    <div>
+        @Html.ActionLink("Voltar ao Inicio", "Index")
+    </div>
+</div>

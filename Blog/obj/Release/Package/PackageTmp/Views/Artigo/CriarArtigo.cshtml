@@ -1,0 +1,131 @@
+﻿@model Blog.Models.Post
+
+<div class="section_two_three entry">
+
+    @using (Html.BeginForm("CriarArtigo", "Artigo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+            <div class="editor-label">
+                Escolha categoria:
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("Categoria", ViewData["Categorias"] as List<SelectListItem>)
+            </div>
+            <br/>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.titulo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.titulo)
+                @Html.ValidationMessageFor(model => model.titulo)
+            </div>
+            <br />
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Autor)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Autor)
+                @Html.ValidationMessageFor(model => model.Autor)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.SobreAutor)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.SobreAutor, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.SobreAutor)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FotoAutor)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Caminho_Foto_1)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Texto_1)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Texto_1, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.Texto_1)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Caminho_Foto_2)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Texto_2)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Texto_2, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.Texto_2)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Caminho_Foto_3)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Texto_3)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Texto_3, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.Texto_3)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Caminho_Foto_4)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+            <br/>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Texto_4)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Texto_4, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.Texto_4)
+            </div>
+            <br/>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Caminho_Foto_5)
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+            <br/>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Texto_5)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Texto_5, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.Texto_5)
+            </div>
+            <br/>
+            <p>
+                <input type="submit" value="Cadastrar" />
+            </p>
+    }
+    <br/>
+    <div>
+        <strong>@Html.ActionLink("Voltar a lista", "Index")</strong>
+    </div>
+</div>

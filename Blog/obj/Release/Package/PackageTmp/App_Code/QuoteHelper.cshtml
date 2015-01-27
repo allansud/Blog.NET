@@ -1,0 +1,17 @@
+﻿@using Blog.Models;
+
+@helper exibeQuotes() {
+
+    using (BlogContext db = new BlogContext())
+    {
+        int quoteTotal = db.Quote.ToList().Count();
+        Random r = new Random();
+        int q = r.Next(1, quoteTotal);
+        Quotes quote = db.Quote.Where(qt => qt.codigo == q).FirstOrDefault();
+
+        <div class="top_slogan">
+            @quote.quote
+        </div>
+    }
+}
+

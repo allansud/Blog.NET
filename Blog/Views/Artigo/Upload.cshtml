@@ -1,0 +1,49 @@
+﻿@model Blog.Models.DownloadFileInfo
+
+<div class="section_two_three entry">
+    <h2>Upload de Projetos</h2>
+
+    @using (Html.BeginForm("Upload", "Artigo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.FileName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FileName)
+                @Html.ValidationMessageFor(model => model.FileName)
+            </div>
+            
+            <br/>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.descricao)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.descricao, new { id = "styled" })
+                @Html.ValidationMessageFor(model => model.descricao)
+            </div>
+            <br/>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+            <div class="editor-field">
+                <input type="file" name="arquivos" />
+            </div>
+
+            <br/>
+            <p>
+                <input type="submit" value="Enviar" />
+            </p>
+
+    }
+    <br />
+    <div>
+        <strong>@Html.ActionLink("Voltar para lista", "Projetos")</strong>
+    </div>
+</div>

@@ -1,0 +1,216 @@
+﻿@model IEnumerable<Blog.Models.Categoria>
+
+<div class="main_content">
+
+
+    <div class="section_two_three entry">
+
+        <h2>@ViewBag.Title</h2>
+        <p><strong>Interesse</strong> no desenvolvimento de sistemas em <strong>.NET/Java.</strong> Sou autodidata e participo de fóruns da área de desenvolvimento,
+             busco conhecer melhores práticas e as novidades do mercado nesta área. </p>
+
+        <br/>
+
+        <h2>@ViewBag.Title2</h2>
+        <p>
+            Ensino Superior Completo, <strong>Unip</strong>  
+        </p>
+        <br/>
+
+        <h2>@ViewBag.Title3</h2>
+
+        <p>
+            <strong>Empresa:</strong> ArqDigital Serviços e Soluções – TI.
+        </p>
+        <p>
+            <strong>Cargo:</strong> GED – Laserfiche ECM BPM – Implantação do sistema – Manutenção – Infra-estrutura; Cliente e Servidor;
+            Workflow; Records Management; Web Access; Audit Trail; Laserfiche Mobile; Quick Fields; WebLink; Laserfiche Plus; Agenda Manager; SDK C#;
+        </p>
+        <p><strong>Período:</strong> Março de 2013 a atualmente.</p>
+        <br/>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>
+                <strong>Empresa:</strong> Caixa Seguros S/A.
+            </p>
+            <p><strong>Cargo:</strong> Analista de T.I.</p>
+            <p>
+                <strong>Atividades:</strong> Apoio a atividades de elicitação de requisitos (Comunicar-se com usuarios e clientes para determinar quais são os requisitos);
+                Análise de requisitos (Determinar se o estado do requisito está obscuro, incompleto, ambíguo, ou contraditório e resolver e problema); Registros dos requisitos
+                (Documentar de varias formas, tais como documentos, de linguagem natural, casos de uso ou processo de especificação)
+            </p>
+            <p><strong>Período:</strong> Outubro de 2010 a Fevereiro de 2013.</p>
+            <br />
+
+            <p>
+                <strong>Empresa:</strong> ECT – Empresa Brasileira de Correios e Telégrafos.
+            </p>
+            <p>
+                <strong>Atividade:</strong> Desenvolvendo trabalho com suporte técnico e pesquisa (Estágio).
+            </p>
+            <p><strong>Período:</strong> Julho de 2008 a Novembro de 2008.</p>
+            <br />
+
+            <p>
+                <strong>Empresa:</strong> Banco do Brasil.
+            </p>
+            <p>
+                <strong>Atividade:</strong> Operador Logístico.
+            </p>
+            <p><strong>Período:</strong> Setembro de 2009 a Fevereiro de 2010.</p>
+            <br />
+
+            <p>
+                <strong>Empresa:</strong> : Moura Refrigeração & Informática.
+            </p>
+            <p>
+                <strong>Atividade:</strong> Montagem, configuração, manutenção e suporte técnico de computadores, redes Wireless, roteadores e redes cabeadas;
+                Instalação, configuração, manutenção e suporte de Sistemas Operacionais (XP, Vista, Linux Ubuntu).
+            </p>
+            <p><strong>Período:</strong> Fevereiro de 2004 a Junho de 2006.</p>
+            <br />
+
+            <h2>@ViewBag.Title4</h2>
+
+            <p>
+                <strong>Inglês</strong>
+            </p>
+            <p>
+                <strong>Proficiência:</strong> Domínio da leitura e alguma dificuldade na comunicação verbal.
+            </p>
+            <p><strong>Comentário:</strong> Convivência  com  americanos  nos  dois últimos anos (2006/2008). </p>
+            <br />
+
+            <p>
+                <strong>Espanhol</strong>
+            </p>
+            <p>
+                <strong>Proficiência:</strong> Domínio da leitura e comunicação verbal. .
+            </p>
+        }
+        else
+        {
+            <p>
+                @Html.ActionLink("Quer saber mais, registrar-se?", "Registrar", "Account") ou @Html.ActionLink("Logar", "Logar", "Account")
+            </p>
+        }
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h3>@ViewBag.Title5</h3>
+
+            <p><strong>Java – j2SE – J2EE</strong></p>
+            <br />
+
+            <ul>
+                <li>Servlet Container</li>
+                <li>Servidor de Aplicação</li>
+                <li>DAO - Data Access Object</li>
+                <li>Fábrica de Conexões</li>
+            </ul>
+            <br />
+
+            <p><strong>ASP.NET DOT.NET C#</strong></p>
+            <br />
+
+            <ul>
+                <li>Tipos de Dados e Estruturas em C#</li>
+                <li>Classes e Namespaces</li>
+                <li>Métodos e Parâmetros</li>
+                <li>Manipulação de Streams e Diretórios</li>
+                <li>ADO.Net</li>
+                <li>Introdução às Aplicações .Net</li>
+                <li>Mini Projetos</li>
+            </ul>
+            <br />
+
+            <p><strong>.NET C# MVC</strong></p>
+            <br />
+
+            <ul>
+                <li>Introdução ao ASP.NET MVC</li>
+                <li>Controlando Requisições e a Listagem de Produtos</li>
+                <li>Lidando com Formulários e o Cadastro de Produtos</li>
+                <li>Validando um produto com Model Validation</li>
+                <li>Customizando as rotas</li>
+                <li>Requisições elegantes com AJAX</li>
+                <li>Filtros para Autenticação Usuários</li>
+            </ul>
+            <br />
+
+            <h2>Conhecimentos</h2>
+
+            <p><strong>FrameWorks Java</strong></p>
+            <br />
+
+            <ul>
+                <li>JSF 2.0</li>
+                <li>Hibernate 4</li>
+                <li>PrimeFaces 4</li>
+                <li>Facelets</li>
+                <li>Jstl</li>
+                <li>Spring Security</li>
+            </ul>
+            <br />
+        }
+        else
+        {
+            <br/>
+            <p><strong>.NET C# MVC</strong></p>
+            <br />
+
+            <ul>
+                <li>Introdução ao ASP.NET MVC</li>
+                <li>Controlando Requisições e a Listagem de Produtos</li>
+                <li>Lidando com Formulários e o Cadastro de Produtos</li>
+                <li>Validando um produto com Model Validation</li>
+                <li>Customizando as rotas</li>
+                <li>Requisições elegantes com AJAX</li>
+                <li>Filtros para Autenticação Usuários</li>
+            </ul>
+            <br/>
+            
+            <p><strong>Java – j2SE – J2EE</strong></p>
+            <br/>
+            
+            <p>
+                @Html.ActionLink("Quer saber mais, registrar-se?", "Registrar", "Account") ou @Html.ActionLink("Logar", "Logar", "Account")
+            </p>
+        }
+
+    </div>
+
+    <div class="section_one_three sidebar">
+        <h2>Categorias</h2>
+        <ul>
+            @foreach (var categoria in ViewData["Categorias"] as List<Blog.Models.Categoria>)
+            {
+                <li>@Html.EncodedActionLink(categoria.nome, "Index", "Artigo", new { id = categoria.id }, null)</li>
+            }
+        </ul>
+
+
+        <h2>Autor</h2>
+        <img src="~/images/allan_a.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            Interesse no desenvolvimento de sistemas em <strong>.NET/Java</strong>. Sou autodidata e participo de fóruns da área de desenvolvimento, <strong>busco conhecer melhores práticas</strong> e as novidades do mercado nesta área.
+        </p>
+        <a href="#" class="more">Allan Freitas</a>
+
+        <div class="clear"></div>
+
+
+        <h2>Coding</h2>
+        <img src="~/images/coding.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            <a href="http://hourofcode.com/br">A Hora do Código</a> é um movimento global que atinge dezenas de milhões de estudantes em mais de 180 países. Qualquer um, em qualquer lugar, pode organizar um evento da Hora do Código. 
+            Tutoriais de uma hora estão disponíveis em mais de 30 idiomas. Não é necessário experiência. Podem participar pessoas com idades entre 4 e 104 anos.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="clear"></div>

@@ -1,0 +1,103 @@
+﻿@model Blog.Models.Usuario
+
+<div class="main_content">
+
+
+    <div class="section_two_three entry">
+
+        <h2>Registrar</h2>
+        <img src="~/images/slider-image1.jpg" alt="" title="" border="0" class="entry_image" />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Usuario</legend>
+
+                <div class="editor-label">
+                    @Resources.Resource.Name
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.nome)
+                    @Html.ValidationMessageFor(model => model.nome)
+                </div>
+
+                <div class="editor-label">
+                    @Resources.Resource.Email
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.email)
+                    @Html.ValidationMessageFor(model => model.email)
+                </div>
+
+                <div class="editor-label">
+                    @Resources.Resource.Password
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.senha)
+                    @Html.ValidationMessageFor(model => model.senha)
+                </div>
+
+                <div class="editor-label">
+                    @Resources.Resource.Confirm_password
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.confirmarSenha)
+                    @Html.ValidationMessageFor(model => model.confirmarSenha)
+                </div>
+
+                <div class="editor-label">
+                    @Resources.Resource.City
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.cidade)
+                    @Html.ValidationMessageFor(model => model.cidade)
+                </div>
+
+                <div class="editor-label">
+                    @Resources.Resource.Phone
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.telefone)
+                    @Html.ValidationMessageFor(model => model.telefone)
+                </div>
+
+                <p>
+                    <input type="submit" value=@Resources.Resource.Register />
+                </p>
+            </fieldset>
+        }
+
+    </div>
+
+    <div class="section_one_three sidebar">
+        <h2>Categorias</h2>
+        <ul>
+            @foreach (var categoria in ViewData["Categorias"] as List<Blog.Models.Categoria>)
+            {
+                <li>@Html.EncodedActionLink(categoria.nome, "Index", "Artigo", new { id = categoria.id }, null)</li>
+            }
+        </ul>
+
+
+        <h2>@Resources.Resource.Author</h2>
+        <img src="~/images/allan_a.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            @Resources.Resource.Author_desc
+        </p>
+        <a href="#" class="more">Allan Freitas</a>
+
+        <div class="clear"></div>
+
+
+        <h2>Coding</h2>
+        <img src="~/images/coding.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            <a href="http://hourofcode.com/br">A Hora do Código</a> é um movimento global que atinge dezenas de milhões de estudantes em mais de 180 países. Qualquer um, em qualquer lugar, pode organizar um evento da Hora do Código.
+            Tutoriais de uma hora estão disponíveis em mais de 30 idiomas. Não é necessário experiência. Podem participar pessoas com idades entre 4 e 104 anos.
+        </p>
+
+    </div>
+
+</div>

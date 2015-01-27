@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Blog.Models.DownloadFileInfo>
+
+<div class="main_content">
+    <div class="section_two_three entry">
+        <h2>Projetos</h2>
+
+        <p>@if (User.IsInRole("ROLE_ADMINISTRADOR"))
+        {
+            <strong>@Html.ActionLink("Enviar novo Projeto", "Upload", "Artigo")</strong>
+        }
+        </p>
+        <br/>
+        <table cellpadding="1" cellspacing="5">
+            <tr>
+                <th>
+                    <strong>@Html.DisplayNameFor(model => model.FileID)</strong>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FileName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.descricao)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.descricao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Download", "Download", "Artigo", new { id = item.FileID }, null)
+                        @if (User.IsInRole("ROLE_ADMINISTRADOR"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.FileID })                        
+                            @Html.ActionLink("Delete", "Delete", new { id = item.FileID })
+                        }
+                        
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

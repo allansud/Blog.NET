@@ -1,0 +1,64 @@
+﻿@QuoteHelper.exibeQuotes()
+<div class="slider">
+    <div class="flexslider">
+        <ul class="slides">
+            <li>
+                <a href="page.html"><img src="~/images/coding_1.png" alt="" title="" border="0" /></a>
+                <div class="flex-caption">
+                    <h2>@Resources.Resource.Projects</h2>
+                    <p>@Resources.Resource.Project_desc</p>
+                    @Html.ActionLink("Projetos", "Projetos", "Artigo", null, new { @class = "slider_button" })
+                </div>
+            </li>
+            <li>
+                <a href="page.html"><img src="~/images/intellij.png" alt="" title="" border="0" /></a>
+                <div class="flex-caption">
+                    <h2>@Resources.Resource.Tutorials</h2>
+                    <p>@Resources.Resource.Tutorials_desc</p>
+                    <a href="#" class="slider_button">Tutoriais</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main_content">
+
+    <div class="section_one_three">
+        <h2 class="centered_title">@Resources.Resource.Projects</h2>
+        <div class="roundimg"><a href="#" title=""><img src="images/icon_clients.png" alt="" title="" /></a></div>
+        <p class="centered_text">
+            @Resources.Resource.Projects_main
+        </p>
+        <a href="#" class="more">@Resources.Resource.ReadMore</a>
+    </div>
+
+    <div class="section_one_three">
+        <h2 class="centered_title">@Resources.Resource.Tutorials</h2>
+        <div class="roundimg"><a href="#" title=""><img src="images/icon_services.png" alt="" title="" /></a></div>
+        <p class="centered_text">
+            @Resources.Resource.Tutorials_main
+        </p>
+        <a href="#" class="more">Saber mais</a>
+    </div>
+
+    <div class="section_one_three">
+        <h2 class="centered_title">@Resources.Resource.Contact</h2>
+        <div class="roundimg"><a href="#" title=""><img src="images/icon_contact.png" alt="" title="" /></a></div>
+        <p class="centered_text">
+            @Resources.Resource.Contact_main
+        </p>
+        <a href="#" class="more">Saber mais</a>
+    </div>
+
+</div>
+
+<div class="clear"></div>
+
+<script type="text/javascript" charset="utf-8">
+var $ = jQuery.noConflict();
+  $(window).load(function() {
+    $('.flexslider').flexslider({
+          animation: "slide"
+    });
+  });
+</script> 

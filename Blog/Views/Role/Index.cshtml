@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Blog.Models.Permissao>
+
+<div class="main_content">
+
+
+    <div class="section_two_three entry">
+
+        <h2>@ViewBag.Title</h2>
+        <img src="~/images/slider-image1.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table>
+            <tr>
+                <th>
+                    Permissão
+                </th>
+                <th>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.role)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.codigo }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.codigo }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.codigo })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <h3>Listing</h3>
+        <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+            <li>voluptate velit esse cillum dolore eu fugiat nulla pariatur</li>
+            <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+            <li>occaecat cupidatat non proident, sunt in</li>
+        </ul>
+
+        <h4>Blockquote</h4>
+        <blockquote>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </blockquote>
+
+    </div>
+
+    <div class="section_one_three sidebar">
+        <h2>Categorias</h2>
+        <ul>
+            @foreach (var categoria in ViewData["Categorias"] as List<Blog.Models.Categoria>)
+            {
+                <li>@Html.EncodedActionLink(categoria.nome, "Index", "Artigo", new { id = categoria.id }, null)</li>
+            }
+        </ul>
+
+
+        <h2>Testimonials</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur <strong>adipisicin</strong>g elit, sed do eiusmod tempor incididunt <a href="#">consectetur</a> adipisicing elit, sed do eiusmod <strong>tempor incididunt</strong> ut labore et dolore magna aliqua.
+        </p>
+        <a href="#" class="more">John Doe</a>
+
+        <div class="clear"></div>
+
+
+        <h2>Sidebar Photo</h2>
+        <img src="~/images/slider-image2.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            Lorem ipsum dolor sit amet, consectetur <strong>adipisicin</strong>g elit, sed do eiusmod tempor incididunt <a href="#">consectetur</a> adipisicing elit, sed do eiusmod <strong>tempor incididunt</strong> ut labore et dolore magna aliqua.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="clear"></div>

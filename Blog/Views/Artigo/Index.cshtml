@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<Blog.Models.Post>
+@using PagedList.Mvc;
+
+<div class="main_content">
+    <div class="section_two_three entry">
+
+        <h2>@ViewBag.Title</h2>
+
+        <p>
+            @if (User.IsInRole("ROLE_ADMINISTRADOR"))
+            {
+                <strong>@Html.ActionLink("Cadastrar Artigo", "CriarArtigo")</strong>
+            }
+        </p>
+        <br />
+        @using (Html.BeginForm("Index", "Artigo", FormMethod.Get))
+        {
+            <p>
+                <strong>Buscar por autor:</strong> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Buscar" />
+            </p>
+        }
+        <br/><br/>
+
+        <table>
+            <tr>
+                <th>
+                   @Html.ActionLink("Autor", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    Título
+                </th>
+                <th>
+                    @Html.ActionLink("Assunto", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Autor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Texto_1)
+                    </td>
+                    <td>
+                        <strong>@Html.ActionLink("Olhar", "Olhar", new { id = item.Id })</strong>
+                        @if (User.IsInRole("ROLE_ADMINISTRADOR"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        }                      
+                    </td>
+                </tr>
+            }
+        </table>
+        <br/><br /><br />
+
+        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+
+    <div class="section_one_three sidebar">
+        <h2>Categorias</h2>
+        <ul>
+            @foreach (var categoria in ViewData["Categorias"] as List<Blog.Models.Categoria>)
+            {
+                <li>@Html.EncodedActionLink(categoria.nome, "Index", "Artigo", new { id = categoria.id }, null)</li>
+            }
+        </ul>
+
+
+        <h2>Autor</h2>
+        <img src="~/images/allan_a.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            Interesse no desenvolvimento de sistemas em <strong>.NET/Java</strong>. Sou autodidata e participo de fóruns da área de desenvolvimento, <strong>busco conhecer melhores práticas</strong> e as novidades do mercado nesta área.
+        </p>
+        <a href="#" class="more">Allan Freitas</a>
+
+        <div class="clear"></div>
+
+
+        <h2>Coding</h2>
+        <img src="~/images/coding.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            <a href="http://hourofcode.com/br">A Hora do Código</a> é um movimento global que atinge dezenas de milhões de estudantes em mais de 180 países. Qualquer um, em qualquer lugar, pode organizar um evento da Hora do Código.
+            Tutoriais de uma hora estão disponíveis em mais de 30 idiomas. Não é necessário experiência. Podem participar pessoas com idades entre 4 e 104 anos.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="clear"></div>
+

@@ -1,0 +1,72 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/knockout")
+    @Scripts.Render("~/Scripts/jquery")
+</head>
+<body>
+    <div id="header">
+        <div class="header_content">
+
+            <div class="logo"><a href="index.html">Allan</a> <span>| Portfolio</span></div>
+
+            <div class="menu">
+                <ul>
+                    <li class="selected">@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink(@Resources.Resource.Register, "Registrar", "Account")</li>
+                    }                    
+                    <li>@Html.ActionLink("Artigos", "AlternateIndex", "Artigo")</li>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink(@Resources.Resource.Login, "Logar", "Account")</li>
+                    }
+                    @if (User.IsInRole("ROLE_ADMINISTRADOR"))
+                    {
+                        <li>@Html.ActionLink("Admin", "Index", "Role")</li>
+                    }                  
+                    <li>@Html.ActionLink("Curriculum", "Index", "Curriculo")</li>                                        
+                    <li>@Html.ActionLink(@Resources.Resource.Contact, "Index", "Contato")</li>     
+                </ul>
+            </div>
+        </div>
+    </div><!-- End of Header-->
+    <div id="wrap">
+        @RenderBody()
+    </div>
+    <div class="footer">
+        <div class="footer_content">
+            <div class="footer_left">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p>Bem vindo, @HttpContext.Current.User.Identity.Name</p>
+                }
+                <ul class="footer_menu">
+                    @if (User.IsInRole("ROLE_MEMBRO") || User.IsInRole("ROLE_ADMINISTRADOR"))
+                    {
+                        <li>@Html.ActionLink(@Resources.Resource.LogOut, "LogOut", "Account")</li>
+                        <li><strong>@Html.EncodedActionLink("Mudar Senha?", "MudarSenha", "Account", null, null)</strong></li>
+                    }                    
+                    <li class="selected">@Html.ActionLink("Home", "Index", "Home")</li> 
+                    <li>@Html.ActionLink("Portfolio", "Index", "Portfolio")</li>
+                    <li>@Html.ActionLink(@Resources.Resource.Contact, "Index", "Contato")</li>    
+                </ul>
+            </div>
+            <div class="footer_right">
+                <ul class="social_icons">
+                    <li><a href="#"><img src="~/images/icon_rss.png" alt="" title="" /></a></li>
+                    <li><a href="http://www.facebook.com/profile.php?id=100000312533591"><img src="~/images/icon_facebook.png" alt="" title="" /></a></li>
+                    <li><a href="https://twitter.com/Allansud"><img src="~/images/icon_twitter.png" alt="" title="" /></a></li>
+                    <li><a href="http://br.linkedin.com/pub/allan-freitas/47/b32/a43/"><img src="~/images/icon_dribbble.png" alt="" title="" /></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</body>
+</html>

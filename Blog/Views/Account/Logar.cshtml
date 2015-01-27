@@ -1,0 +1,73 @@
+﻿@model Blog.Models.UsuarioLogin
+<div class="main_content">
+
+    <div class="section_two_three entry">
+
+        <h2>@ViewBag.Title</h2>
+        <img src="~/images/slider-image1.jpg" alt="" title="" border="0" class="entry_image" />
+        @using (Html.BeginForm("Logar", "Account", FormMethod.Post, new { id = "loginForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div id="loginStatus"></div>
+
+            <div class="editor-label">
+                @Resources.Resource.Email
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.email, new { id = "userid" })
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+
+            <div class="editor-label">
+                @Resources.Resource.Password
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.senha, new { id = "passowdid" })
+                @Html.ValidationMessageFor(model => model.senha)
+            </div>
+
+            <div class="editor-label">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Resources.Resource.Logado
+            </div>
+            <br/>
+
+            <p>
+                <input type="submit" value="Logar" />
+            </p>
+        }
+
+    </div>
+
+    <div class="section_one_three sidebar">
+        <h2>Categorias</h2>
+        <ul>
+            @foreach (var categoria in ViewData["Categorias"] as List<Blog.Models.Categoria>)
+            {
+                <li>@Html.EncodedActionLink(categoria.nome, "Index", "Artigo", new { id = categoria.id }, null)</li>
+            }
+        </ul>
+
+
+        <h2>Autor</h2>
+        <img src="~/images/allan_a.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            Interesse no desenvolvimento de sistemas em <strong>.NET/Java</strong>. Sou autodidata e participo de fóruns da área de desenvolvimento, <strong>busco conhecer melhores práticas</strong> e as novidades do mercado nesta área.
+        </p>
+        <a href="#" class="more">Allan Freitas</a>
+
+        <div class="clear"></div>
+
+
+        <h2>Coding</h2>
+        <img src="~/images/coding.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            <a href="http://hourofcode.com/br">A Hora do Código</a> é um movimento global que atinge dezenas de milhões de estudantes em mais de 180 países. Qualquer um, em qualquer lugar, pode organizar um evento da Hora do Código.
+            Tutoriais de uma hora estão disponíveis em mais de 30 idiomas. Não é necessário experiência. Podem participar pessoas com idades entre 4 e 104 anos.
+        </p>
+
+    </div>
+
+</div>

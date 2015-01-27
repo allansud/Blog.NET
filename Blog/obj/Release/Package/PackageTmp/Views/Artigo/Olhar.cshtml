@@ -1,0 +1,118 @@
+﻿@model Blog.Models.Post
+
+
+<div class="main_content">
+
+    <div class="section_two_three entry">
+
+        <h2>@ViewBag.Titulo</h2>
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Autor)</strong>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Autor)
+        </div>
+        <br/>
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.SobreAutor)</strong>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.SobreAutor)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.FotoAutor)</strong>
+        </div>
+        <div class="display-field">
+            <img src="@Url.Content(ViewBag.FotoAutor)" alt="" title="" border="0" class="entry_image" />
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Caminho_Foto_1)</strong>
+        </div>
+        <div class="display-field">
+            <img src="@Url.Content(ViewBag.Foto1)" alt="" title="" border="0" class="entry_image" />
+        </div>
+        <br />
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Texto_1)
+        </div>
+        <div class="display-field">
+            @Html.Markdown(Model.Texto_1)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Caminho_Foto_2)</strong>
+        </div>
+        <div class="display-field">
+            <img src="@Url.Content(ViewBag.Foto2)" alt="" title="" border="0" class="entry_image" />
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Texto_2)</strong>
+        </div>
+        <div class="display-field">
+            @Html.Markdown(Model.Texto_2)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Caminho_Foto_3)</strong>
+        </div>
+        <div class="display-field">
+            <img src="@Url.Content(ViewBag.Foto3)" alt="" title="" border="0" class="entry_image" />
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Texto_3)</strong>
+        </div>
+        <div class="display-field">
+            @Html.Markdown(Model.Texto_3)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Caminho_Foto_4)</strong>
+        </div>
+        <div class="display-field">
+            <img src="@Url.Content(ViewBag.Foto4)" alt="" title="" border="0" class="entry_image" />
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Texto_4)</strong>
+        </div>
+        <div class="display-field">
+            @Html.Markdown(Model.Texto_4)
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Caminho_Foto_5)</strong>
+        </div>
+        <div class="display-field">
+            <img src="@Url.Content(ViewBag.Foto5)" alt="" title="" border="0" class="entry_image" />
+        </div>
+        <br />
+
+        <div class="display-label">
+            <strong>@Html.DisplayNameFor(model => model.Texto_5)</strong>
+        </div>
+        <div class="display-field">
+            @Html.Markdown(Model.Texto_5)
+        </div>
+        <br />
+
+        <p>
+            <strong>@Html.ActionLink("Voltar a Lista", "Index")</strong>
+        </p>
+    </div>
+</div>

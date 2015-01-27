@@ -1,0 +1,104 @@
+﻿@model Blog.Models.Contato
+<div class="main_content">
+
+
+    <div class="section_two_three entry">
+
+        <h2>@ViewBag.Title</h2>
+        <img src="~/images/slider-image1.jpg" alt="" title="" border="0" class="entry_image" />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Contato</legend>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.nome)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.nome)
+                    @Html.ValidationMessageFor(model => model.nome)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.email)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.email)
+                    @Html.ValidationMessageFor(model => model.email)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.telefone)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.telefone) (Opcional)
+                    @Html.ValidationMessageFor(model => model.telefone)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.assunto)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.assunto)
+                    @Html.ValidationMessageFor(model => model.assunto)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.cidade)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.cidade) (Opcional)
+                    @Html.ValidationMessageFor(model => model.cidade)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.mensagem)
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.mensagem, new { id = "styled" })
+                    @Html.ValidationMessageFor(model => model.mensagem)
+                </div>
+
+                <p>
+                    <input type="submit" value="Enviar"/>
+                </p>
+            </fieldset>
+        }
+
+    </div>
+
+    <div class="section_one_three sidebar">
+        <h2>Categorias</h2>
+        <ul>
+            @foreach (var categoria in ViewData["Categorias"] as List<Blog.Models.Categoria>)
+            {
+                <li>@Html.EncodedActionLink(categoria.nome, "Index", "Artigo", new { id = categoria.id }, null)</li>
+            }
+        </ul>
+
+
+        <h2>Testimonials</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur <strong>adipisicin</strong>g elit, sed do eiusmod tempor incididunt <a href="#">consectetur</a> adipisicing elit, sed do eiusmod <strong>tempor incididunt</strong> ut labore et dolore magna aliqua.
+        </p>
+        <a href="#" class="more">John Doe</a>
+
+        <div class="clear"></div>
+
+
+        <h2>Coding</h2>
+        <img src="~/images/coding.jpg" alt="" title="" border="0" class="entry_image" />
+        <p>
+            <a href="http://hourofcode.com/br">A Hora do Código</a> é um movimento global que atinge dezenas de milhões de estudantes em mais de 180 países. Qualquer um, em qualquer lugar, pode organizar um evento da Hora do Código.
+            Tutoriais de uma hora estão disponíveis em mais de 30 idiomas. Não é necessário experiência. Podem participar pessoas com idades entre 4 e 104 anos.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="clear"></div>
