@@ -183,6 +183,8 @@
     <Content Include="images\bullet.png" />
     <Content Include="images\coding.jpg" />
     <Content Include="images\coding_1.png" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\github.jpg" />
     <Content Include="images\icon_clients.png" />
     <Content Include="images\icon_contact.png" />
     <Content Include="images\icon_dribbble.png" />
