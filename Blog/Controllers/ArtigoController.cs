@@ -139,7 +139,7 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ADMINISTRADOR")]
+        [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Delete(int? id) 
         {
             using (BlogContext context = new BlogContext())
@@ -159,7 +159,7 @@ namespace Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMINISTRADOR")]
+        [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Delete(int id) 
         {
             using (BlogContext context = new BlogContext())
@@ -192,7 +192,7 @@ namespace Blog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "ADMINISTRADOR")]
+        [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Edit([Bind(Include = "FileID, descricao")]DownloadFileInfo info) 
         {
             using (BlogContext context = new BlogContext())
@@ -265,7 +265,7 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ROLE_MEMBRO, ROLE_ADMINISTRADOR")]
+        [Authorize(Roles = "ROLE_MEMBRO,ROLE_ADMINISTRADOR")]
         public FileResult Download(String id) 
         {
             int CurrentFileID = Convert.ToInt32(id);
