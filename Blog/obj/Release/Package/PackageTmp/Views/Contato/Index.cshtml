@@ -5,14 +5,10 @@
     <div class="section_two_three entry">
 
         <h2>@ViewBag.Title</h2>
-        <img src="~/images/slider-image1.jpg" alt="" title="" border="0" class="entry_image" />
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
-            <fieldset>
-                <legend>Contato</legend>
 
                 <div class="editor-label">
                     @Html.LabelFor(model => model.nome)
@@ -65,7 +61,6 @@
                 <p>
                     <input type="submit" value="Enviar"/>
                 </p>
-            </fieldset>
         }
 
     </div>
@@ -80,11 +75,12 @@
         </ul>
 
 
-        <h2>Testimonials</h2>
+        <h2>Autor</h2>
+        <img src="~/images/allan_a.jpg" alt="" title="" border="0" class="entry_image" />
         <p>
-            Lorem ipsum dolor sit amet, consectetur <strong>adipisicin</strong>g elit, sed do eiusmod tempor incididunt <a href="#">consectetur</a> adipisicing elit, sed do eiusmod <strong>tempor incididunt</strong> ut labore et dolore magna aliqua.
+            Interesse no desenvolvimento de sistemas em <strong>.NET/Java</strong>. Sou autodidata e participo de fóruns da área de desenvolvimento, <strong>busco conhecer melhores práticas</strong> e as novidades do mercado nesta área.
         </p>
-        <a href="#" class="more">John Doe</a>
+        <a href="#" class="more">Allan Freitas</a>
 
         <div class="clear"></div>
 
