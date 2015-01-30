@@ -128,13 +128,22 @@ namespace Blog.Repositories
             }
         }
 
-        public void RemoveUsuario(int Id)
+        public bool RemoveUsuario(int Id)
         {
-            using (BlogContext ctx = new BlogContext())
+            try
             {
-                Usuario usuario = ctx.Usuario.Find(Id);
-                ctx.Usuario.Remove(usuario);
-                ctx.SaveChanges();
+                using (BlogContext ctx = new BlogContext())
+                {
+                    Usuario usuario = ctx.Usuario.Find(Id);
+                    ctx.Usuario.Remove(usuario);
+                    ctx.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 

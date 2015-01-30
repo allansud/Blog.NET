@@ -1,4 +1,5 @@
 ﻿using Blog.Models;
+using Blog.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +34,30 @@ namespace Blog.ApiControllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            try
+            {
+                using (BlogContext context = new BlogContext())
+                {
+                    UsuarioRepositorio userRepos = new UsuarioRepositorio();
+                    var user = context.Usuario.Find(id);
+                    if (user == null)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.NotFound);
+                    }
+
+                    if (userRepos.RemoveUsuario(id))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
         }
 
         private List<UsuarioRest> GetUsuarios() 
