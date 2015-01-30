@@ -14,7 +14,6 @@ using System.Web.Routing;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using System.ServiceModel.Activation;
-using Blog.WCFService;
 
 namespace Blog
 {
@@ -26,7 +25,6 @@ namespace Blog
         {
             AreaRegistration.RegisterAllAreas();
 
-            RouteTable.Routes.Add(new ServiceRoute("Service", new WebServiceHostFactory(), typeof(RestService)));
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer<BlogContext>(new Blog.Models.BlogContext.DropCreateifChangeInitializer());
             WebApiConfig.Register(GlobalConfiguration.Configuration);
