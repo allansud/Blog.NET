@@ -181,6 +181,7 @@
     <Compile Include="Repositories\UsuarioRepositorio.cs" />
     <Compile Include="Repositories\UtilRepositorio.cs" />
     <Compile Include="Repositorios\CategoriaRespositorio.cs" />
+    <Compile Include="Repositorios\DownloadFileInfoRepositorio.cs" />
     <Compile Include="Repositorios\PermissaoRepositorio.cs" />
     <Compile Include="Repositorios\PostRepositorio.cs" />
     <Compile Include="Repositorios\QuoteRepositorio.cs" />

@@ -17,144 +17,144 @@ namespace Blog.Controllers
     public class ArtigoController : Controller
     {
         PostRepositorio postRepos = new PostRepositorio();
+        CategoriaRespositorio catRepo = new CategoriaRespositorio();
+        DownloadFileInfoRepositorio downRepos = new DownloadFileInfoRepositorio();
 
         [HttpGet]
         [EncryptedActionParameter]
         public ActionResult Index(int id, String sortOrder, String searchString, String currentFilter, int? page)
         {
-            using (BlogContext context = new BlogContext())
+            ViewData["Categorias"] = catRepo.GetAll().ToList<Categoria>();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
             {
-                ViewData["Categorias"] = context.Categoria.ToList<Categoria>();
-
-                ViewBag.CurrentSort = sortOrder;
-                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-
-                if (searchString != null)
-                {
-                    page = 1;
-                }
-                else 
-                {
-                    searchString = currentFilter;
-                }
-
-                ViewBag.CurrentFilter = searchString;
-
-                List<Post> posts = new List<Post>();
-                if (id != 0)
-                {
-                    posts = context.Post.Where(p => p.Id == id).ToList<Post>();
-                }
-                else 
-                {
-                    posts = context.Post.ToList<Post>();
-                }                
-                
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    posts = posts.Where(p => p.Autor.Contains(searchString) || p.Texto_1.Contains(searchString)).ToList<Post>();
-                }
-
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        posts = posts.OrderByDescending(p => p.Autor).ToList<Post>();
-                        break;
-                    case "Date":
-                        posts = posts.OrderBy(p => p.Data_cadastro).ToList<Post>();
-                        break;
-                    case "date_desc":
-                        posts.OrderByDescending(p => p.Data_cadastro);
-                        break;
-                    default:
-                        posts = posts.OrderBy(p => p.Autor).ToList<Post>();
-                        break;
-                }
-
-                int pageSize = 6;
-                int pageNumber = (page ?? 1);
-                return View(posts.ToPagedList(pageNumber, pageSize));
+                page = 1;
             }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            List<Post> posts = new List<Post>();
+            if (id != 0)
+            {
+                posts = postRepos.Get(p => p.Categoria.id == id).ToList<Post>();
+            }
+            else
+            {
+                posts = postRepos.GetAll().ToList<Post>(); ;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(p => p.Autor.Contains(searchString) || p.Texto_1.Contains(searchString)).ToList<Post>();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    posts = posts.OrderByDescending(p => p.Autor).ToList<Post>();
+                    break;
+                case "Date":
+                    posts = posts.OrderBy(p => p.Data_cadastro).ToList<Post>();
+                    break;
+                case "date_desc":
+                    posts.OrderByDescending(p => p.Data_cadastro);
+                    break;
+                default:
+                    posts = posts.OrderBy(p => p.Autor).ToList<Post>();
+                    break;
+            }
+
+            postRepos.Dispose();
+            catRepo.Dispose();
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(posts.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]
         public ActionResult AlternateIndex(string id, String sortOrder, String searchString, String currentFilter, int? page)
         {
-            using (BlogContext context = new BlogContext())
+            ViewData["Categorias"] = catRepo.GetAll().ToList<Categoria>();
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
             {
-                ViewData["Categorias"] = context.Categoria.ToList<Categoria>();
-
-                ViewBag.CurrentSort = sortOrder;
-                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-
-                if (searchString != null)
-                {
-                    page = 1;
-                }
-                else
-                {
-                    searchString = currentFilter;
-                }
-
-                ViewBag.CurrentFilter = searchString;
-
-                List<Post> posts = new List<Post>();
-                if (id != null)
-                {
-                    int idSearch = int.Parse(id);
-                    posts = context.Post.Where(p => p.Id == idSearch).ToList<Post>();
-                }
-                else
-                {
-                    posts = context.Post.ToList<Post>();
-                }
-
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    posts = posts.Where(p => p.Autor.Contains(searchString) || p.Texto_1.Contains(searchString)).ToList<Post>();
-                }
-
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        posts = posts.OrderByDescending(p => p.Autor).ToList<Post>();
-                        break;
-                    case "Date":
-                        posts = posts.OrderBy(p => p.Data_cadastro).ToList<Post>();
-                        break;
-                    case "date_desc":
-                        posts.OrderByDescending(p => p.Data_cadastro);
-                        break;
-                    default:
-                        posts = posts.OrderBy(p => p.Autor).ToList<Post>();
-                        break;
-                }
-
-                int pageSize = 6;
-                int pageNumber = (page ?? 1);
-                return View(posts.ToPagedList(pageNumber, pageSize));
+                page = 1;
             }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            List<Post> posts = new List<Post>();
+            int idSearch = Convert.ToInt16(id);
+            if (id != null)
+            {
+                posts = postRepos.Get(p => p.Categoria.id == idSearch).ToList<Post>();
+            }
+            else
+            {
+                posts = postRepos.GetAll().ToList<Post>(); ;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(p => p.Autor.Contains(searchString) || p.Texto_1.Contains(searchString)).ToList<Post>();
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    posts = posts.OrderByDescending(p => p.Autor).ToList<Post>();
+                    break;
+                case "Date":
+                    posts = posts.OrderBy(p => p.Data_cadastro).ToList<Post>();
+                    break;
+                case "date_desc":
+                    posts.OrderByDescending(p => p.Data_cadastro);
+                    break;
+                default:
+                    posts = posts.OrderBy(p => p.Autor).ToList<Post>();
+                    break;
+            }
+
+            postRepos.Dispose();
+            catRepo.Dispose();
+
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(posts.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]
         [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Delete(int? id) 
         {
-            using (BlogContext context = new BlogContext())
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                DownloadFileInfo info = context.DownloadFileInfo.Find(id);
-                if (info == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(info);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            DownloadFileInfo info = downRepos.Find(id);
+            if (info == null)
+            {
+                return HttpNotFound();
+            }
+            downRepos.Dispose();
+            return View(info);
         }
 
         [HttpPost]
@@ -162,13 +162,10 @@ namespace Blog.Controllers
         [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Delete(int id) 
         {
-            using (BlogContext context = new BlogContext())
-            {
-                DownloadFileInfo info = context.DownloadFileInfo.Find(id);
-                context.DownloadFileInfo.Remove(info);
-                context.SaveChanges();
-                return RedirectToAction("Projetos");
-            }
+            downRepos.Excluir(d => d.FileID == id);
+            downRepos.SalvarTodos();
+            downRepos.Dispose();
+            return RedirectToAction("Projetos");
         }
 
         [HttpGet]
@@ -205,6 +202,7 @@ namespace Blog.Controllers
             else 
             {
                 postRepos.Excluir(p => p.Id == id);
+                postRepos.SalvarTodos();
                 return RedirectToAction("AlternateIndex");
             }
         }
@@ -233,16 +231,13 @@ namespace Blog.Controllers
         [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Edit([Bind(Include = "FileID, descricao")]DownloadFileInfo info) 
         {
-            using (BlogContext context = new BlogContext())
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    context.Entry(info).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
-                    return RedirectToAction("Projetos");
-                }
-                return View(info);
+                downRepos.Atualizar(info);
+                downRepos.SalvarTodos();
+                return RedirectToAction("Projetos");
             }
+            return View(info);
         }
 
         [HttpGet]
@@ -251,7 +246,7 @@ namespace Blog.Controllers
             using (BlogContext context = new BlogContext())
             {   
                 int idSearch = int.Parse(id);
-                Post post = context.Post.Where(p => p.Id == idSearch).FirstOrDefault<Post>();
+                Post post = postRepos.Find(idSearch);              
 
                 String nomeArquivo = Path.GetFileName(post.FotoAutor);
                 String nomeFoto1 = Path.GetFileName(post.Caminho_Foto_1);
@@ -268,6 +263,7 @@ namespace Blog.Controllers
                 ViewBag.Foto4 = "~/Content/Uploads/" + nomeFoto4;
                 ViewBag.Foto5 = "~/Content/Uploads/" + nomeFoto5;
 
+                postRepos.Dispose();
                 return View(post);
             }
         }
@@ -280,19 +276,16 @@ namespace Blog.Controllers
             return View();
         }
 
-        public static List<SelectListItem> GetDropDown() 
+        public List<SelectListItem> GetDropDown() 
         {
-            using (BlogContext context = new BlogContext())
-            {
-                List<SelectListItem> ls = new List<SelectListItem>();
-                var lm = context.Categoria.ToList<Categoria>();
+            List<SelectListItem> ls = new List<SelectListItem>();
+            var lm = catRepo.GetAll().ToList<Categoria>();
 
-                foreach (var c in lm)
-                {
-                    ls.Add(new SelectListItem() { Text = c.nome, Value = c.id.ToString() });
-                }
-                return ls;
+            foreach (var c in lm)
+            {
+                ls.Add(new SelectListItem() { Text = c.nome, Value = c.id.ToString() });
             }
+            return ls;
         }
 
         [HttpGet]
@@ -330,14 +323,11 @@ namespace Blog.Controllers
         }
 
         public List<DownloadFileInfo> GetFiles() 
-        {            
-            using (BlogContext context = new BlogContext())
-            {
-                List<DownloadFileInfo> listFiles = new List<DownloadFileInfo>();
-                listFiles = context.DownloadFileInfo.ToList<DownloadFileInfo>();
+        {
+            List<DownloadFileInfo> listFiles = new List<DownloadFileInfo>();
+            listFiles = downRepos.GetAll().ToList<DownloadFileInfo>();
 
-                return listFiles;
-            }
+            return listFiles;
         }
 
         [HttpGet]
@@ -393,128 +383,128 @@ namespace Blog.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ROLE_ADMINISTRADOR")]
-        public ActionResult CriarArtigo(IEnumerable<HttpPostedFileBase> arquivos, Post post, String Categoria)
+        public ActionResult CriarArtigo(IEnumerable<HttpPostedFileBase> arquivos, Post post, String idCategoria)
         {
             ViewData["Categorias"] = GetDropDown();
 
             try
             {
-                using (BlogContext context = new BlogContext())
+                if (ModelState.IsValid == false)
                 {
-                    if (ModelState.IsValid == false)
+                    foreach (var arquivo in arquivos)
                     {
-                        foreach (var arquivo in arquivos)
+                        if (arquivo != null && arquivo.ContentLength > 0)
                         {
-                            if (arquivo != null && arquivo.ContentLength > 0)
+                            var nomeArquivo = Path.GetFileName(arquivo.FileName);
+                            var caminho = Path.Combine(Server.MapPath("~/Content/Uploads"), nomeArquivo);
+
+                            if (Session["FOTO_1"] == null)
                             {
-                                var nomeArquivo = Path.GetFileName(arquivo.FileName);
-                                var caminho = Path.Combine(Server.MapPath("~/Content/Uploads"), nomeArquivo);
-
-                                if (Session["FOTO_1"] == null)
-                                {
-                                    Session["FOTO_1"] = caminho;
-                                }
-
-                                if (Session["FOTO_1"] != null)
-                                {
-                                    if (Session["FOTO_2"] == null)
-                                    {
-                                        String caminho1 = Session["FOTO_1"].ToString();
-                                        String caminho2 = caminho;
-                                        if (caminho1 != caminho2)
-                                        {
-                                            Session["FOTO_2"] = caminho;
-                                        }
-                                    }
-                                }
-
-                                if (Session["FOTO_2"] != null)
-                                {
-                                    if (Session["FOTO_3"] == null)
-                                    {
-                                        String caminho1 = Session["FOTO_2"].ToString();
-                                        String caminho2 = caminho;
-                                        if (caminho1 != caminho2)
-                                        {
-                                            Session["FOTO_3"] = caminho;
-                                        }
-                                    }
-                                }
-
-                                if (Session["FOTO_3"] != null)
-                                {
-                                    if (Session["FOTO_4"] == null)
-                                    {
-                                        String caminho1 = Session["FOTO_3"].ToString();
-                                        String caminho2 = caminho;
-                                        if (caminho1 != caminho2)
-                                        {
-                                            Session["FOTO_4"] = caminho;
-                                        }
-                                    }
-                                }
-
-                                if (Session["FOTO_4"] != null)
-                                {
-                                    if (Session["FOTO_5"] == null)
-                                    {
-                                        String caminho1 = Session["FOTO_4"].ToString();
-                                        String caminho2 = caminho;
-                                        if (caminho1 != caminho2)
-                                        {
-                                            Session["FOTO_5"] = caminho;
-                                        }
-                                    }
-                                }
-
-                                if (Session["FOTO_5"] != null)
-                                {
-                                    if (Session["FOTO_6"] == null)
-                                    {
-                                        String caminho1 = Session["FOTO_5"].ToString();
-                                        String caminho2 = caminho;
-                                        if (caminho1 != caminho2)
-                                        {
-                                            Session["FOTO_6"] = caminho;
-                                        }
-                                    }
-                                }
-
-                                arquivo.SaveAs(caminho);
+                                Session["FOTO_1"] = caminho;
                             }
+
+                            if (Session["FOTO_1"] != null)
+                            {
+                                if (Session["FOTO_2"] == null)
+                                {
+                                    String caminho1 = Session["FOTO_1"].ToString();
+                                    String caminho2 = caminho;
+                                    if (caminho1 != caminho2)
+                                    {
+                                        Session["FOTO_2"] = caminho;
+                                    }
+                                }
+                            }
+
+                            if (Session["FOTO_2"] != null)
+                            {
+                                if (Session["FOTO_3"] == null)
+                                {
+                                    String caminho1 = Session["FOTO_2"].ToString();
+                                    String caminho2 = caminho;
+                                    if (caminho1 != caminho2)
+                                    {
+                                        Session["FOTO_3"] = caminho;
+                                    }
+                                }
+                            }
+
+                            if (Session["FOTO_3"] != null)
+                            {
+                                if (Session["FOTO_4"] == null)
+                                {
+                                    String caminho1 = Session["FOTO_3"].ToString();
+                                    String caminho2 = caminho;
+                                    if (caminho1 != caminho2)
+                                    {
+                                        Session["FOTO_4"] = caminho;
+                                    }
+                                }
+                            }
+
+                            if (Session["FOTO_4"] != null)
+                            {
+                                if (Session["FOTO_5"] == null)
+                                {
+                                    String caminho1 = Session["FOTO_4"].ToString();
+                                    String caminho2 = caminho;
+                                    if (caminho1 != caminho2)
+                                    {
+                                        Session["FOTO_5"] = caminho;
+                                    }
+                                }
+                            }
+
+                            if (Session["FOTO_5"] != null)
+                            {
+                                if (Session["FOTO_6"] == null)
+                                {
+                                    String caminho1 = Session["FOTO_5"].ToString();
+                                    String caminho2 = caminho;
+                                    if (caminho1 != caminho2)
+                                    {
+                                        Session["FOTO_6"] = caminho;
+                                    }
+                                }
+                            }
+
+                            arquivo.SaveAs(caminho);
                         }
-
-                        post.FotoAutor = Session["FOTO_1"].ToString();
-                        post.Caminho_Foto_1 = Session["FOTO_2"].ToString();
-                        post.Caminho_Foto_2 = Session["FOTO_3"].ToString();
-                        post.Caminho_Foto_3 = Session["FOTO_4"].ToString();
-                        post.Caminho_Foto_4 = Session["FOTO_5"].ToString();
-                        post.Caminho_Foto_5 = Session["FOTO_6"].ToString();
-
-                        if (Categoria != null)
-                        {
-                            post.Categoria = context.Categoria.Find(int.Parse(Categoria));
-                        }
-
-                        post.Data_cadastro = DateTime.Now;
-                        post.Aprovado = true;
-
-                        context.Post.Add(post);
-                        context.SaveChanges();
-
-                        Session["FOTO_1"] = null;
-                        Session["FOTO_2"] = null;
-                        Session["FOTO_3"] = null;
-                        Session["FOTO_4"] = null;
-                        Session["FOTO_5"] = null;
-                        Session["FOTO_6"] = null;
-
-                        return RedirectToAction("Index");
                     }
-                    else 
+
+                    post.FotoAutor = Session["FOTO_1"].ToString();
+                    post.Caminho_Foto_1 = Session["FOTO_2"].ToString();
+                    post.Caminho_Foto_2 = Session["FOTO_3"].ToString();
+                    post.Caminho_Foto_3 = Session["FOTO_4"].ToString();
+                    post.Caminho_Foto_4 = Session["FOTO_5"].ToString();
+                    post.Caminho_Foto_5 = Session["FOTO_6"].ToString();
+
+                    if (idCategoria != null)
                     {
-                        ModelState.AddModelError("", "Não foi possivel enviar o Artigo!");
+                        post.Categoria = catRepo.Find(int.Parse(idCategoria));
+                        catRepo.Dispose();
                     }
+
+                    post.Data_cadastro = DateTime.Now;
+                    post.Aprovado = true;
+
+                    postRepos.Adicionar(post);
+                    postRepos.SalvarTodos();
+
+                    Session["FOTO_1"] = null;
+                    Session["FOTO_2"] = null;
+                    Session["FOTO_3"] = null;
+                    Session["FOTO_4"] = null;
+                    Session["FOTO_5"] = null;
+                    Session["FOTO_6"] = null;
+
+                    postRepos.Dispose();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Não foi possivel enviar o Artigo!");
                 }
             }
             catch (DbEntityValidationException dbEx)
