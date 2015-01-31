@@ -277,6 +277,7 @@
     <Content Include="Views\Artigo\AlternateIndex.cshtml" />
     <Content Include="Views\Account\MudarSenha.cshtml" />
     <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Artigo\DeleteArtigo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\Resource.resx">

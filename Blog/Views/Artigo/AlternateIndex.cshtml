@@ -16,7 +16,7 @@
         @using (Html.BeginForm("Index", "Artigo", FormMethod.Get))
         {
             <p>
-                <strong>Buscar por autor:</strong> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <strong>Buscar por autor/Assunto:</strong> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
                 <input type="submit" value="Buscar" />
             </p>
         }
@@ -53,7 +53,7 @@
                         @if (User.IsInRole("ROLE_ADMINISTRADOR"))
                         {
                             @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            @Html.ActionLink("Delete", "DeleteArtigo", new { id = item.Id })
                         }
                     </td>
                 </tr>

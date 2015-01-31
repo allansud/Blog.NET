@@ -10,13 +10,13 @@ using PagedList;
 using System.Web.Hosting;
 using System.Net;
 using Blog.Security;
+using Blog.Repositorios;
 
 namespace Blog.Controllers
 {
     public class ArtigoController : Controller
     {
-        //
-        // GET: /Artigo/
+        PostRepositorio postRepos = new PostRepositorio();
 
         [HttpGet]
         [EncryptedActionParameter]
@@ -172,7 +172,45 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "ADMINISTRADOR")]
+        [Authorize(Roles = "ROLE_ADMINISTRADOR")]
+        public ActionResult DeleteArtigo(int? id) 
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                else 
+                {
+                    var artigos = postRepos.Find(id);
+                    postRepos.Dispose();
+                    return View(artigos);   
+                }
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "ROLE_ADMINISTRADOR")]
+        public ActionResult DeleteArtigo(int id) 
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else 
+            {
+                postRepos.Excluir(p => p.Id == id);
+                return RedirectToAction("AlternateIndex");
+            }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "ROLE_ADMINISTRADOR")]
         public ActionResult Edit(int? id) 
         {
             using (BlogContext context = new BlogContext())
