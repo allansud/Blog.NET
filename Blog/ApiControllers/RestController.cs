@@ -1,5 +1,5 @@
 ﻿using Blog.Models;
-using Blog.Repositories;
+using Blog.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,8 @@ namespace Blog.ApiControllers
 {
     public class RestController : ApiController
     {
+        UsuarioRepositorio userRepo = new UsuarioRepositorio();
+
         // GET api/<controller>
         public IEnumerable<UsuarioRest> Get()
         {
@@ -18,9 +20,26 @@ namespace Blog.ApiControllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public UsuarioRest Get(int id)
         {
-            return "value";
+            try
+            {
+                UsuarioRest userRest = new UsuarioRest();
+                Usuario user = userRepo.Find(id);
+                if (user != null)
+                {                    
+                    userRest.codigo = user.codigo;
+                    userRest.nome = user.nome;
+                    userRest.email = user.email;
+                    userRest.cidade = user.cidade;
+                    userRest.telefone = user.telefone;
+                }
+                return userRest;
+            }
+            catch (Exception)
+            {               
+                throw;
+            }
         }
 
         // POST api/<controller>
@@ -35,22 +54,18 @@ namespace Blog.ApiControllers
 
         // DELETE api/<controller>/5
         public HttpResponseMessage Delete(int id)
-        {
+        {            
             try
             {
-                using (BlogContext context = new BlogContext())
+                var user = userRepo.Find(id);
+                if (user == null)
                 {
-                    UsuarioRepositorio userRepos = new UsuarioRepositorio();
-                    var user = context.Usuario.Find(id);
-                    if (user == null)
-                    {
-                        return Request.CreateResponse(HttpStatusCode.NotFound);
-                    }
-
-                    if (userRepos.RemoveUsuario(id))
-                    {
-                        return Request.CreateResponse(HttpStatusCode.OK);
-                    }
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+                else 
+                {
+                    userRepo.Excluir(u => u.codigo == id);
+                    userRepo.Dispose();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
             }
@@ -62,16 +77,15 @@ namespace Blog.ApiControllers
 
         private List<UsuarioRest> GetUsuarios() 
         {
-            using (BlogContext context = new BlogContext())
+            List<UsuarioRest> userRest = new List<UsuarioRest>();
+            var lista = userRepo.GetAll();
+            foreach (var i in lista)
             {
-                List<UsuarioRest> userRest = new List<UsuarioRest>();
-                var lista = context.Usuario.Select(u => new { u.codigo, u.nome, u.telefone, u.email, u.cidade });
-                foreach (var i in lista)
-                {
-                    userRest.Add(new UsuarioRest() { codigo = i.codigo, nome = i.nome, email = i.email, telefone = i.telefone, cidade = i.cidade });
-                }
-                return userRest;
+                userRest.Add(new UsuarioRest() { codigo = i.codigo, nome = i.nome, email = i.email, telefone = i.telefone, cidade = i.cidade });
             }
+
+            userRepo.Dispose();
+            return userRest;
         }
     }
 }

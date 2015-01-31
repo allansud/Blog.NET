@@ -163,6 +163,8 @@
     </Compile>
     <Compile Include="Helpers\EncriptaQueryString.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
+    <Compile Include="Models\Base\IRepositorio.cs" />
+    <Compile Include="Models\Base\Repositorio.cs" />
     <Compile Include="Models\BlogContext.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Comentario.cs" />
@@ -178,6 +180,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\UsuarioRepositorio.cs" />
     <Compile Include="Repositories\UtilRepositorio.cs" />
+    <Compile Include="Repositorios\CategoriaRespositorio.cs" />
+    <Compile Include="Repositorios\PermissaoRepositorio.cs" />
+    <Compile Include="Repositorios\PostRepositorio.cs" />
+    <Compile Include="Repositorios\QuoteRepositorio.cs" />
+    <Compile Include="Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="Security\CustomMembership.cs" />
     <Compile Include="Security\CustomRole.cs" />
     <Compile Include="Security\EncryptedActionParameterAttribute.cs" />
