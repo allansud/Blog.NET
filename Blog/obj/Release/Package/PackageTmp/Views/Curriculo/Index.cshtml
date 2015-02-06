@@ -17,6 +17,94 @@
         </p>
         <br/>
 
+        @if (User.Identity.IsAuthenticated)
+        {
+            <h3>@ViewBag.Title5</h3>
+
+            <p><strong>Java – j2SE – J2EE</strong></p>
+            <br />
+
+            <ul>
+                <li>Servlet Container</li>
+                <li>Servidor de Aplicação</li>
+                <li>DAO - Data Access Object</li>
+                <li>Fábrica de Conexões</li>
+            </ul>
+            <br />
+
+            <p><strong>ASP.NET DOT.NET C#</strong></p>
+            <br />
+
+            <ul>
+                <li>Tipos de Dados e Estruturas em C#</li>
+                <li>Classes e Namespaces</li>
+                <li>Métodos e Parâmetros</li>
+                <li>Manipulação de Streams e Diretórios</li>
+                <li>ADO.Net</li>
+                <li>Introdução às Aplicações .Net</li>
+                <li>Mini Projetos</li>
+            </ul>
+            <br />
+
+            <p><strong>.NET C# MVC</strong></p>
+            <br />
+
+            <ul>
+                <li>Introdução ao ASP.NET MVC</li>
+                <li>Controlando Requisições e a Listagem de Produtos</li>
+                <li>Lidando com Formulários e o Cadastro de Produtos</li>
+                <li>Validando um produto com Model Validation</li>
+                <li>Customizando as rotas</li>
+                <li>Requisições elegantes com AJAX</li>
+                <li>Filtros para Autenticação Usuários</li>
+            </ul>
+            <br />
+
+            <h2>Conhecimentos</h2>
+
+            <p><strong>FrameWorks Java</strong></p>
+            <br />
+
+            <ul>
+                <li>JSF 2.0</li>
+                <li>Hibernate 4</li>
+                <li>PrimeFaces 4</li>
+                <li>Facelets</li>
+                <li>Jstl</li>
+                <li>Spring Security</li>
+            </ul>
+            <br />
+        }
+        else
+        {
+            <br />
+            <p><strong>.NET C# MVC</strong></p>
+            <br />
+
+            <ul>
+                <li>Introdução ao ASP.NET MVC</li>
+                <li>Controlando Requisições e a Listagem de Produtos</li>
+                <li>Lidando com Formulários e o Cadastro de Produtos</li>
+                <li>Validando um produto com Model Validation</li>
+                <li>Customizando as rotas</li>
+                <li>Requisições elegantes com AJAX</li>
+                <li>Filtros para Autenticação Usuários</li>
+            </ul>
+            <br />
+
+            <p><strong>Java – j2SE – J2EE</strong></p>
+            <br />
+
+            <p>
+                @Html.ActionLink("Quer saber mais, registrar-se?", "Registrar", "Account") ou @Html.ActionLink("Logar", "Logar", "Account")
+            </p>
+            <br />
+            <p>
+                <a href="https://github.com/allansud"><img src="~/images/github.jpg" width="150" alt="Meus projetos do GitHUb" title="" /></a>
+            </p>
+            <br/>
+        }
+
         <h2>@ViewBag.Title3</h2>
 
         <p>
@@ -93,93 +181,6 @@
         {
             <p>
                 @Html.ActionLink("Quer saber mais, registrar-se?", "Registrar", "Account") ou @Html.ActionLink("Logar", "Logar", "Account")
-            </p>
-        }
-
-        @if (User.Identity.IsAuthenticated)
-        {
-            <h3>@ViewBag.Title5</h3>
-
-            <p><strong>Java – j2SE – J2EE</strong></p>
-            <br />
-
-            <ul>
-                <li>Servlet Container</li>
-                <li>Servidor de Aplicação</li>
-                <li>DAO - Data Access Object</li>
-                <li>Fábrica de Conexões</li>
-            </ul>
-            <br />
-
-            <p><strong>ASP.NET DOT.NET C#</strong></p>
-            <br />
-
-            <ul>
-                <li>Tipos de Dados e Estruturas em C#</li>
-                <li>Classes e Namespaces</li>
-                <li>Métodos e Parâmetros</li>
-                <li>Manipulação de Streams e Diretórios</li>
-                <li>ADO.Net</li>
-                <li>Introdução às Aplicações .Net</li>
-                <li>Mini Projetos</li>
-            </ul>
-            <br />
-
-            <p><strong>.NET C# MVC</strong></p>
-            <br />
-
-            <ul>
-                <li>Introdução ao ASP.NET MVC</li>
-                <li>Controlando Requisições e a Listagem de Produtos</li>
-                <li>Lidando com Formulários e o Cadastro de Produtos</li>
-                <li>Validando um produto com Model Validation</li>
-                <li>Customizando as rotas</li>
-                <li>Requisições elegantes com AJAX</li>
-                <li>Filtros para Autenticação Usuários</li>
-            </ul>
-            <br />
-
-            <h2>Conhecimentos</h2>
-
-            <p><strong>FrameWorks Java</strong></p>
-            <br />
-
-            <ul>
-                <li>JSF 2.0</li>
-                <li>Hibernate 4</li>
-                <li>PrimeFaces 4</li>
-                <li>Facelets</li>
-                <li>Jstl</li>
-                <li>Spring Security</li>
-            </ul>
-            <br />
-        }
-        else
-        {
-            <br/>
-            <p><strong>.NET C# MVC</strong></p>
-            <br />
-
-            <ul>
-                <li>Introdução ao ASP.NET MVC</li>
-                <li>Controlando Requisições e a Listagem de Produtos</li>
-                <li>Lidando com Formulários e o Cadastro de Produtos</li>
-                <li>Validando um produto com Model Validation</li>
-                <li>Customizando as rotas</li>
-                <li>Requisições elegantes com AJAX</li>
-                <li>Filtros para Autenticação Usuários</li>
-            </ul>
-            <br/>
-            
-            <p><strong>Java – j2SE – J2EE</strong></p>
-            <br/>
-            
-            <p>
-                @Html.ActionLink("Quer saber mais, registrar-se?", "Registrar", "Account") ou @Html.ActionLink("Logar", "Logar", "Account")
-            </p>
-            <br/>
-            <p>
-                <a href="https://github.com/allansud"><img src="~/images/github.jpg" width="150" alt="Meus projetos do GitHUb" title="" /></a>                
             </p>
         }
 

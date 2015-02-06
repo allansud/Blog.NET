@@ -79,6 +79,7 @@ namespace Blog.ApiControllers
         {
             List<UsuarioRest> userRest = new List<UsuarioRest>();
             var lista = userRepo.GetAll();
+
             foreach (var i in lista)
             {
                 userRest.Add(new UsuarioRest() { codigo = i.codigo, nome = i.nome, email = i.email, telefone = i.telefone, cidade = i.cidade });
