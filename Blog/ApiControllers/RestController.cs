@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
+
 
 namespace Blog.ApiControllers
 {
@@ -42,14 +44,41 @@ namespace Blog.ApiControllers
             }
         }
 
+        [Route("login")]
+        [HttpGet]
+        public HttpResponseMessage Login(String email, String senha) 
+        {
+            try
+            {                
+                Usuario usuario = userRepo.Get(u => u.email.Equals(email)).FirstOrDefault<Usuario>();
+
+                if (BCrypt.Net.BCrypt.Verify(senha, usuario.senha))
+                {
+                    userRepo.Dispose();
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    userRepo.Dispose();
+                    return Request.CreateResponse(HttpStatusCode.NotFound);   
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }            
+        }
+
         // POST api/<controller>
         public void Post([FromBody]string value)
         {
+
         }
 
         // PUT api/<controller>/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE api/<controller>/5

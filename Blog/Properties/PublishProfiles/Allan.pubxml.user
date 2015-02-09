@@ -25,7 +25,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2015 17:34:55</publishTime>
     </File>
     <File Include="bin/Blog.dll">
-      <publishTime>02/03/2015 17:57:26</publishTime>
+      <publishTime>02/09/2015 18:13:44</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/03/2015 17:34:55</publishTime>
@@ -220,7 +220,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2015 17:34:54</publishTime>
     </File>
     <File Include="Views/Curriculo/Index.cshtml">
-      <publishTime>02/03/2015 17:54:15</publishTime>
+      <publishTime>02/04/2015 11:04:52</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>02/03/2015 17:34:54</publishTime>
@@ -253,7 +253,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2015 22:39:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/03/2015 17:57:27</publishTime>
+      <publishTime>02/09/2015 12:43:27</publishTime>
     </File>
   </ItemGroup>
 </Project>
