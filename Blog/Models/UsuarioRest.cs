@@ -20,6 +20,9 @@ namespace Blog.Models
         public string email { get; set; }
 
         [DataMember]
+        public string senha { get; set; }
+
+        [DataMember]
         public string telefone { get; set; }
 
         [DataMember]

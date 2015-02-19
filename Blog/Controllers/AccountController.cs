@@ -51,7 +51,7 @@ namespace Blog.Controllers
                                 String senhaEncrypted = usuarioRepositorio.EncryptPassword(usuario.senha);
                                 usuario.senha = senhaEncrypted;
                                 usuario.confirmarSenha = senhaEncrypted;
-                                usuario.data_cadastro = DateTime.Now.Date;
+                                usuario.data_cadastro = DateTime.Now.ToShortDateString();
                                 usuario.Permissoes.Add(p);
                                 db.Usuario.Add(usuario);
                                 db.SaveChanges();
@@ -80,7 +80,7 @@ namespace Blog.Controllers
                                 String senhaEncrypted = usuarioRepositorio.EncryptPassword(usuario.senha);
                                 usuario.senha = senhaEncrypted;
                                 usuario.confirmarSenha = senhaEncrypted;
-                                usuario.data_cadastro = DateTime.Now.Date;
+                                usuario.data_cadastro = DateTime.Now.ToShortDateString();
                                 usuario.Permissoes.Add(p);
                                 db.Usuario.Add(usuario);
                                 db.SaveChanges();

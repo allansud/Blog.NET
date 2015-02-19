@@ -174,6 +174,8 @@
     <Compile Include="Models\Permissao.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Quotes.cs" />
+    <Compile Include="Models\ReuniaoFamiliar.cs" />
+    <Compile Include="Models\ReuniaoFamiliarRest.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioLogin.cs" />
     <Compile Include="Models\UsuarioRest.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Repositorios\PermissaoRepositorio.cs" />
     <Compile Include="Repositorios\PostRepositorio.cs" />
     <Compile Include="Repositorios\QuoteRepositorio.cs" />
+    <Compile Include="Repositorios\ReuniaoFamiliarRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="Security\CustomMembership.cs" />
     <Compile Include="Security\CustomRole.cs" />

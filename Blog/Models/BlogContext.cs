@@ -24,6 +24,7 @@ namespace Blog.Models
         public DbSet<Post> Post { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<DownloadFileInfo> DownloadFileInfo { get; set; }
+        public DbSet<ReuniaoFamiliar> ReuniaoFamiliar { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,6 +36,18 @@ namespace Blog.Models
         {
             try
             {
+                var reunioesFamiliares = new List<ReuniaoFamiliar>
+                {
+                    new ReuniaoFamiliar {Titulo = "A Razão de Nossa Esperança", Palestrante = "Junior", Data = DateTime.Now.ToShortDateString() },
+                    new ReuniaoFamiliar {Titulo = "Amar os Outrose Viver com as DIferenças", Palestrante = "Salvio", Data = DateTime.Now.ToShortDateString() },
+                    new ReuniaoFamiliar {Titulo = "Pais: Os melhores Professores do Evangelho", Palestrante = "Arivaldo", Data = DateTime.Now.ToShortDateString() },
+                    new ReuniaoFamiliar {Titulo = "Sim, Senhor, Eu Te Seguirei", Palestrante = "Darci", Data = DateTime.Now.ToShortDateString() },
+                    new ReuniaoFamiliar {Titulo = "Aproximar-se do Trono de Deus com Confiança", Palestrante = "Daisy", Data = DateTime.Now.ToShortDateString() }
+                };
+
+                reunioesFamiliares.ForEach(r => context.ReuniaoFamiliar.Add(r));
+                context.SaveChanges();
+
                 var quotes = new List<Quotes>
                 {
                     new Quotes {quote = "Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop questioning. Albert Einstein"},

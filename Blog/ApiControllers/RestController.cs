@@ -1,7 +1,8 @@
 ﻿using Blog.Models;
-using Blog.Repositorios;
+using Blog.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,12 +14,28 @@ namespace Blog.ApiControllers
 {
     public class RestController : ApiController
     {
-        UsuarioRepositorio userRepo = new UsuarioRepositorio();
+        Blog.Repositorios.UsuarioRepositorio userRepo = new Blog.Repositorios.UsuarioRepositorio();
+        Blog.Repositorios.ReuniaoFamiliarRepositorio reuniaoRepositorio = new Blog.Repositorios.ReuniaoFamiliarRepositorio();
+
 
         // GET api/<controller>
         public IEnumerable<UsuarioRest> Get()
         {
             return GetUsuarios();
+        }
+
+        [HttpGet]
+        [Route("ListaReunioes")]
+        public IEnumerable<ReuniaoFamiliarRest> GetReunioes(String reuniao) 
+        {
+            List<ReuniaoFamiliarRest> listaReunioes = new List<ReuniaoFamiliarRest>();
+            var reunioesFamiliares = reuniaoRepositorio.GetAll();
+
+            foreach (var r in reunioesFamiliares) 
+            {
+                listaReunioes.Add(new ReuniaoFamiliarRest{ Codigo = r.Id, Titulo = r.Titulo, Palestrante = r.Palestrante, Data = r.Data});
+            }
+            return listaReunioes;
         }
 
         // GET api/<controller>/5
@@ -70,9 +87,85 @@ namespace Blog.ApiControllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [Route("usuario")]
+        [HttpPost]
+        public HttpResponseMessage Post(String nome, String email, String senha, String confirmarsenha, String cidade, String telefone)
         {
+            try
+            {
+                if (nome == String.Empty || email == String.Empty || senha == String.Empty
+                    && cidade == String.Empty || telefone == String.Empty)
+                {
+                    Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not read subject/tutor from body");
+                }
+                if (nome != String.Empty && email != String.Empty && senha != String.Empty
+                    && cidade != String.Empty && telefone != String.Empty)
+                {
+                    Permissao p = new Permissao();
+                    p.data_cadastro = DateTime.Now.Date;
+                    p.role = "ROLE_MEMBRO";
 
+                    String senhaEncrypted = BCrypt.Net.BCrypt.HashPassword(senha);
+
+                    Usuario usuario = new Usuario();
+
+                    usuario.nome = nome;
+                    usuario.email = email;
+                    usuario.senha = senhaEncrypted;
+                    usuario.confirmarSenha = senhaEncrypted;
+                    usuario.cidade = cidade;
+                    usuario.telefone = telefone;
+                    usuario.data_cadastro = DateTime.Now.ToShortDateString();
+
+                    usuario.Permissoes.Add(p);
+                    userRepo.Adicionar(usuario);
+                    userRepo.SalvarTodos();
+
+                    UtilRepositorio.EnviarEmail(usuario, senha, "Bem vindo ao meu BLOG onde você podera encontrar algumas informações úteis, apesar de ainda não ter terminado.");
+                    return Request.CreateResponse(HttpStatusCode.Created, usuario);
+                }
+                else 
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Não foi possível salvar no banco de dados.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [Route("reunioes")]
+        [HttpPost]
+        public HttpResponseMessage PostReuniao(String titulo, String palestrante, String data) 
+        {
+            try
+            {
+                if (titulo == String.Empty || palestrante == String.Empty || data == String.Empty)
+                {
+                    Request.CreateErrorResponse(HttpStatusCode.NotFound, "Algum dos campos está em branco?");
+                }
+                if (titulo != String.Empty && palestrante != String.Empty && data != String.Empty)
+                {
+                    ReuniaoFamiliar rf = new ReuniaoFamiliar();
+
+                    rf.Titulo = titulo;
+                    rf.Palestrante = palestrante;
+                    rf.Data = data;
+
+                    reuniaoRepositorio.Adicionar(rf);
+                    reuniaoRepositorio.SalvarTodos();
+
+                    return Request.CreateResponse(HttpStatusCode.Created, rf);
+                }
+                else 
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Não foi possível salvar no banco de dados.");
+                }
+            }
+            catch (Exception)
+            {                
+                throw;
+            }
         }
 
         // PUT api/<controller>/5

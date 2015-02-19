@@ -12,6 +12,7 @@ namespace Blog.Models
 
         public Usuario() 
         {
+            ReunioesFamiliares = new HashSet<ReuniaoFamiliar>();
             Permissoes = new HashSet<Permissao>();
             Comentarios = new List<Comentario>();
         }
@@ -65,11 +66,13 @@ namespace Blog.Models
         public String telefone { get; set; }
 
         [ScaffoldColumn(false)]
-        public DateTime data_cadastro { get; set; }
+        public String data_cadastro { get; set; }
 
         [Display(Name = "Perfil")]
         public virtual ICollection<Permissao> Permissoes { get; set; }
 
         public virtual ICollection<Comentario> Comentarios { get; set; }
+
+        public virtual ICollection<ReuniaoFamiliar> ReunioesFamiliares { get; set; }
     }
 }
